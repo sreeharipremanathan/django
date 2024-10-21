@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
     <title>Document</title>
 </head>
-<body style="background-color: antiquewhite;">
+<body>
     <h2>welcome</h2>
     <h3>name :{{name}}</h3>
     <h3>age :{{age}}</h3>
     <h3>place :{{place}}</h3>
 
     <a href="snd">to second page</a>
+
+    <img src="{% static '/images/pic.jpg' %}" alt="">
 </body>
 </html>
