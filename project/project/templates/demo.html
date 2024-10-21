@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,th,td{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>name</th>
+            <th>age</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <th>{{i.name}}</th>
+            <th>{{i.age}}</th>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <form action="">
+        name <input type="text" value="{{data1.name}}">
+        age <input type="text" value="{{data1.age}}">
+    </form>
+</body>
+</html>
