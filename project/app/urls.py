@@ -5,4 +5,6 @@ urlpatterns=[
     path('demo',views.demo),
     path('snd',views.second),
     path('td',views.todo1),
+    path('edit/<id>',views.edit_form),
+    path('delete/<id>',views.delete_fun)
 ]
