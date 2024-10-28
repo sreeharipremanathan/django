@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <label>roll no</label><br>
+        <input type="number" placeholder="roll no" name="roll"><br>
+        <label>Name</label><br>
+        <input type="text" class="input" placeholder="Enter your Name" name="name"><br>
+        <label>Age</label><br>
+        <input type="number" class="input" placeholder="Enter your Age" name="age"><br>
+        <label>Email</label><br>
+        <input type="email" class="input" placeholder="Enter your email" name="email"><br>
+        <label>Phone Number</label><br>
+        <input type="tel" class="input" placeholder="Enter your Mobile Number" name="phno"><br>
+        <br>
+        <input class="btn" type="submit" value="Submit">
+    </form>
+    
+    <table>
+        <tr>
+            <th>roll no</th>
+            <th>name</th>
+            <th>age</th>
+            <th>email</th>
+            <th>phone</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{i.roll}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.age}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.phno}}</td>
+            <td><a href="edit/{{i.roll}}">edit</a></td>
+            <td><a href="dlt/{{i.roll}}">delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>   
+</body>
+</html>
