@@ -1,0 +1,126 @@
+#logo{
+    padding: 5px;
+}
+.dropdown a{
+    padding: 8px;
+}
+/* .nav-link{
+    font-weight:bold;
+} */
+#posters{
+    width: 90%;
+    /* height: ; */
+    border-radius: 8px;
+}
+/* .stream-canvas{
+    position: relative;
+}
+.stream{
+    position: absolute;
+} */
+#stream{
+    width: 100%;
+    border-radius: 4px;
+
+}
+.live-events{
+    position: relative;
+}
+.events{
+    display: flex;
+}
+.events-posters{
+    position: absolute;
+}
+.card-img-top{
+    width: 100%;
+    border-radius: 3px;
+    /* height: 60%; */
+}
+.card{
+    width: auto;
+    margin: 5px;
+    border: none;
+}
+.premier{
+    background-color: rgba(43,49,73,255);
+    height: 600px;
+    position: relative;
+}
+.banner{
+    height: 80%;
+    width: 100%;
+}
+.premier-card{
+    position: absolute;
+}
+/* .premier-caro{
+    position: relative;
+} */
+ footer{
+    background-color: rgb(30, 30, 30);
+ }
+ #contact{
+    font-weight: bold;
+ }
+ .icon-box p{
+    color: white;
+ }
+ .head{
+    color: rgb(149, 149, 149);
+    font-size: 1vw;
+ }
+ .items a{
+    text-decoration: none;
+    color: rgb(149, 149, 149);
+ }
+ .items a:hover{
+    color: white;
+ }
+ .items{
+    color: rgb(149, 149, 149);;
+ }
+
+ /* arm */
+ .main{
+    position: relative;
+ }
+ .poster-card{
+    position: absolute;
+    top: 20%;
+    left:15%;
+ }
+ .img-box{
+    position: absolute;
+    background-color: black;
+ }
+ .img-box p{
+    text-align: center;
+    color: white;
+ }
+ #star{
+    color: red;
+ }
+ .dtls{
+    position: absolute;
+    top: 30%;
+    left: 40%;
+ }
+ .title h3{
+    color: white;
+    font-size: 4vw;
+ }
+ .title p{
+    color: white;
+    font-size: 1vw;
+ }
+ .rating{
+    position: absolute;
+    /* background-color: rgb(38, 38, 38); */
+    width: 400px;
+    border-radius: 4px;
+ }
+ .ratenow{
+    position: absolute;
+ }
+ 
