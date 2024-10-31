@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from .models import *
 import os
+from django.contrib.auth.models import User
+from django.contrib import messages
 # Create your views here.
 
 def shop_login(req):
@@ -14,9 +16,15 @@ def shop_login(req):
             data=authenticate(username=uname,password=password)
             if data:
                 login(req,data)
-                req.session['shop']=uname     #create
-                return redirect(shop_home)
-            
+                if data.is_superuser:
+                    req.session['shop']=uname     #create
+                    return redirect(shop_home)
+                else:
+                    req.session['user']=uname
+                    return redirect(user_home)
+            else:
+                messages.warning(req,'invalid username or password')
+                return redirect(shop_login)            
         return render(req,'login.html')
     
 
@@ -24,6 +32,26 @@ def shop_logout(req):
     logout(req)
     req.session.flush()     #delete
     return redirect(shop_login)
+
+
+def register(req):
+    if req.method=='POST':
+        name=req.POST['name']
+        email=req.POST['email']
+        password=req.POST['password']
+        try:
+            data=User.objects.create_user(first_name=name,username=email,email=email,password=password)
+            data.save()
+        except:
+            messages.warning(req,'user details already exists')
+            return redirect(register)
+    else:
+        return render(req,'register.html')
+
+
+#------------------admin----------------------------------
+
+
 
 
 def shop_home(req):
@@ -69,3 +97,9 @@ def delete_pro(req,id):
     os.remove('media/'+url)
     data.delete()
     return redirect(shop_home)
+
+
+#-----------------user---------------------
+
+def user_home(req):
+    return render(req,'user/user_home.html')
