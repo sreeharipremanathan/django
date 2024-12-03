@@ -4,6 +4,8 @@ from .models import *
 import os
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 
 def shop_login(req):
@@ -39,12 +41,14 @@ def register(req):
         name=req.POST['name']
         email=req.POST['email']
         password=req.POST['password']
+        send_mail('eshop registration', 'eshop account created', settings.EMAIL_HOST_USER, [email])
         try:
             data=User.objects.create_user(first_name=name,username=email,email=email,password=password)
             data.save()
         except:
             messages.warning(req,'user details already exists')
             return redirect(register)
+        return redirect(shop_login)
     else:
         return render(req,'register.html')
 
