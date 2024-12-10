@@ -7,7 +7,7 @@ class Sample(serializers.Serializer):
     age=serializers.IntegerField()
     email=serializers.EmailField()
 
-class model_serializers(serializers.Serializer):
-    class meta:
+class model_serializers(serializers.ModelSerializer):
+    class Meta:
         model=Student
-        feilds='__all__'
+        fields='__all__'

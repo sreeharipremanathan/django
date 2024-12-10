@@ -71,3 +71,37 @@ def fun4(req):
         else:
             return JsonResponse(s.errors,status=status.HTTP_400_BAD_REQUEST)
         
+
+
+class fun6(APIView):
+    def get(self,req):
+        demo=Student.objects.all()
+        s=model_serializers(demo,many=True)
+        return Response(s.data)
+    def post(self,req):
+        s=model_serializers(data=req.data)
+        if s.is_valid():
+            s.save()
+            return JsonResponse(s.data,status=status.HTTP_201_CREATED)
+        else:
+            return JsonResponse(s.data,status=status.HTTP_400_BAD_REQUEST)
+        
+
+class fun7(APIView):
+    def get(self,req,d):
+        try:
+            demo=Student.objects.get(pk=d)
+            s=model_serializers(demo)
+            return Response(s.data)
+        except Student.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        
+
+
+class genericapiview(generics.GenericAPIView,mixins.ListModelMixin,mixins.CreateModelMixin):
+    serializer_class=model_serializers
+    queryset=Student.objects.all()
+    def get(self,req):
+        return self.list(req)
+    def post(self,req):
+        return self.create(req)
