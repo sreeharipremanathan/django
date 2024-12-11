@@ -11,6 +11,8 @@ from django.conf import settings
 def shop_login(req):
     if 'shop' in req.session:
         return redirect(shop_home)
+    elif 'user' in req.session:
+        return redirect(user_home)
     else:
         if req.method=='POST':
             uname=req.POST['uname']
@@ -102,6 +104,14 @@ def delete_pro(req,id):
     data.delete()
     return redirect(shop_home)
 
+def bookings(req):
+    bookings=Buy.objects.all()[::-1][:3]
+    print(bookings)
+    return render(req,'shop/bookings.html',{'data':bookings})
+
+
+
+
 
 #-----------------user---------------------
 
@@ -124,4 +134,25 @@ def add_to_cart(req,pid):
     return redirect(cart_display)
 
 def cart_display(req):
-    return render(req,'user/cart_display.html')
+    log_user=User.objects.get(username=req.session['user'])
+    data=Cart.objects.filter(user=log_user)
+    return render(req,'user/cart_display.html',{'data':data})
+
+def delete_cart(req,id):
+    data=Cart.objects.get(pk=id)
+    data.delete()
+    return redirect(cart_display)
+
+def buy_pro(req,id):
+    product=products.objects.get(pk=id)
+    user=User.objects.get(username=req.session['user'])
+    price=product.offer_price
+    data=Buy.objects.create(user=user,product=product,price=price)
+    data.save()
+    return redirect(user_home)
+
+def view_bookings(req):
+    user=User.objects.get(username=req.session['user'])
+    data=Buy.objects.filter(user=user)[::-1]
+    return render(req,'user/view_bookings.html',{'data':data})
+
