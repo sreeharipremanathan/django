@@ -71,7 +71,25 @@ def fun4(req):
         else:
             return JsonResponse(s.errors,status=status.HTTP_400_BAD_REQUEST)
         
-
+@api_view(['GET','PUT','DELETE'])
+def fun5(req,d):
+    try:
+        demo=Student.objects.get(pk=d)
+    except Student.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if req.method=="GET":
+        s=model_serializers(demo)
+        return Response(s.data)
+    elif req.method=="PUT":
+        s=model_serializers(demo,data=req.data)
+        if s.is_valid():
+            s.save()
+            return Response(s.data)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+    elif req.method=="DELETE":
+        demo.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 class fun6(APIView):
     def get(self,req):
@@ -93,6 +111,26 @@ class fun7(APIView):
             demo=Student.objects.get(pk=d)
             s=model_serializers(demo)
             return Response(s.data)
+        except Student.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    def put(self,req,d):
+        try:
+            demo=Student.objects.get(pk=d)
+            s=model_serializers(demo,data=req.data)
+            if s.is_valid():
+                s.save()
+                return Response(s.data)
+            else:
+                return Response(s.data,status=status.HTTP_400_BAD_REQUEST)
+        except Student.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        
+    def delete(self,req,d):
+        try:
+            demo=Student.objects.get(pk=d)
+            demo.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
         except Student.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         
